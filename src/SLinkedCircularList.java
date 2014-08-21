@@ -1,7 +1,4 @@
-
-// TODO: displaying last node in a list of more than one == DONE
-// TODO: display solitary node (which is also last) == DONE
-// TODO: JUnit Testing
+// TODO: JUnit testing
 
 /**
  * This is a singly linked circular list.
