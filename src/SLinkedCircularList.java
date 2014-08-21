@@ -1,5 +1,7 @@
-// TODO: disaplying last node, displaying solitary node (is also last), contains while loop
 
+// TODO: displaying last node in a list of more than one == DONE
+// TODO: display solitary node (which is also last) == DONE
+// TODO: JUnit Testing
 
 /**
  * This is a singly linked circular list.
@@ -32,7 +34,7 @@ public class SLinkedCircularList implements ListInterface
 		}
 		else
 		{
-			Node currLast = getNodeAt(length);	// currLast is the very last node
+			Node currLast = lastNode;	// currLast is the very last node
 			currLast.next = newNode;	// makes newNode last by having currLast reference it
 			newNode.next = firstNode;	// makes newNode circle back & reference 1st node
 			lastNode = newNode;			// makes lastNode the newNode (which is last)
@@ -166,13 +168,13 @@ public class SLinkedCircularList implements ListInterface
 	{
 		boolean found = false;
 		Node currentNode = firstNode;
-		while (!found && (currentNode != lastNode))// DOES THIS TEST 1st node if there is only 1
+		do
 		{
 			if (anEntry.equals(currentNode.data))
 				found = true;
 			else
 				currentNode = currentNode.next;
-		} // end while
+		} while (!found && (currentNode != lastNode));// end while
 		
 		return found;
 	} // end contains
@@ -201,10 +203,11 @@ public class SLinkedCircularList implements ListInterface
 	{
 		Node currentNode = firstNode;
 		
-		while (currentNode != lastNode)
+		do
 		{
 			System.out.println(currentNode.data);
-		}
+			currentNode = currentNode.next;
+		} while (currentNode != firstNode);
 	} // end display
 	
 	/**
@@ -239,4 +242,32 @@ public class SLinkedCircularList implements ListInterface
 			next = nextNode;
 		} // end constructor
 	} // end Node
+	
+	public static void main(String[] args)
+	{
+		SLinkedCircularList CList = new SLinkedCircularList();
+		CList.add("apple");
+		CList.add("banana");
+		CList.add("cantelope");
+		CList.add("eggplant");
+		CList.add(4, "dandelion");
+		CList.add("flower");
+		//CList.display();
+		CList.remove(5);
+		//CList.display();
+		CList.clear();
+		boolean isItEmpty = CList.isEmpty();
+		System.out.println(isItEmpty);
+		CList.add("audi");
+		CList.add(2, "bmw");
+		CList.add("chevy");
+		//CList.display();
+		CList.replace(2, "benz");
+		//CList.display();
+		Object string = CList.getEntry(2);
+		System.out.println(string);
+		isItEmpty = CList.isEmpty();
+		System.out.println(isItEmpty);
+		CList.display(); // true, benz, false, audi, benz, chevy
+	}
 }
